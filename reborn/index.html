@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cycle of Life — Reborn</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+  <canvas id="stage"></canvas>
+  <div class="vignette" aria-hidden="true"></div>
+
+  <section id="intro" aria-labelledby="intro-title">
+    <div class="intro-inner">
+      <h1 id="intro-title">Cycle of Life</h1>
+      <p class="epigraph">Atoms are constantly constructing DNAs, spending their lifetime, and finally, vanish only to be
+        replaced by new atoms to complete the cycle of life.</p>
+      <p class="lede">This time every strand carries a genome. It eats atoms to build itself, finds a partner and has
+        children who inherit a mix of both, with the odd mutation. When it dies it unzips, and every atom goes back into the soup.
+        Nothing is ever lost.</p>
+      <div class="actions">
+        <button class="primary" data-sound="on">Enter with sound</button>
+        <button data-sound="off">Enter in silence</button>
+      </div>
+    </div>
+  </section>
+
+  <header id="hud" class="hud">
+    <div class="brand">Cycle of Life <em>reborn</em></div>
+    <dl class="stats">
+      <div><dt>Living</dt><dd id="st-living">0</dd></div>
+      <div><dt>Generation</dt><dd id="st-gen">1</dd></div>
+      <div><dt>Births</dt><dd id="st-births">0</dd></div>
+      <div><dt>Deaths</dt><dd id="st-deaths">0</dd></div>
+    </dl>
+    <p class="ledger" id="st-ledger"></p>
+    <figure class="houses">
+      <figcaption>Houses over time <span>· living strands per family</span></figcaption>
+      <canvas id="muller" aria-label="Stacked area chart of living strands per family over the last few minutes"></canvas>
+      <ul id="houses-legend"></ul>
+    </figure>
+  </header>
+
+  <aside id="journal" class="panel" aria-label="Field journal">
+    <header>
+      <h2>Field Journal</h2>
+      <button id="journal-toggle" class="icon" aria-expanded="true" aria-label="Collapse journal">–</button>
+    </header>
+    <div class="journal-body">
+      <ol id="entries"></ol>
+      <p id="journal-status" class="status" hidden></p>
+      <details id="claude-settings">
+        <summary id="claude-summary">✦ Let Claude write this journal</summary>
+        <form id="key-form" autocomplete="off">
+          <label for="api-key">Anthropic API key</label>
+          <input id="api-key" type="password" spellcheck="false" placeholder="sk-ant-…">
+          <label class="check"><input id="remember-key" type="checkbox"> Remember on this device</label>
+          <div class="row">
+            <button type="submit" class="primary">Use this key</button>
+            <button type="button" id="forget-key">Forget key</button>
+          </div>
+          <p class="fine">Your key goes from this page straight to api.anthropic.com and nowhere else. Claude reads a
+            factual snapshot of the world and writes one short entry about every 45 seconds while this tab is visible.</p>
+        </form>
+      </details>
+    </div>
+  </aside>
+
+  <aside id="inspector" class="panel" aria-live="polite" hidden></aside>
+
+  <footer id="controls" class="hud">
+    <div class="buttons">
+      <button id="btn-palette" title="Change palette (P or 1–5)"></button>
+      <button id="btn-speed" title="Change speed ([ and ])">×1</button>
+      <button id="btn-pause" title="Pause (Space)">Pause</button>
+      <button id="btn-sound" title="Sound (M)">Sound off</button>
+      <button id="btn-record" title="Record a video of the canvas (R)">Record</button>
+      <button id="btn-shot" title="Save a still image (S)">Still</button>
+    </div>
+    <p class="hint">Click a strand to follow it · click the water to stir it · <kbd>H</kbd> hides all of this</p>
+  </footer>
+
+  <div id="label" aria-hidden="true" hidden></div>
+  <div id="tooltip" role="tooltip" hidden></div>
+  <div id="toast" role="status"></div>
+
+  <script src="js/noise.js"></script>
+  <script src="js/palettes.js"></script>
+  <script src="js/genome.js"></script>
+  <script src="js/soup.js"></script>
+  <script src="js/strand.js"></script>
+  <script src="js/world.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/naturalist.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/main.js"></script>
+</body>
+
+</html>
